@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Khoa CNTT - Đại học Gia Định</title>
+    <!-- Google Fonts & CSS Reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            color: #2C3E50;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .logo, .nav-links a, .cta-button, .hero-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HEADER STICKY ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0A2B5E;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: #00A6C4;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2f3e;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #00A6C4;
+        }
+        .menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #0A2B5E;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #00A6C4;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #00A6C4;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            background: #00A6C4;
+            color: white;
+        }
+        .btn-solid {
+            background: #00A6C4;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,166,196,0.3);
+        }
+        .btn-solid:hover {
+            background: #0A2B5E;
+            transform: translateY(-2px);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, rgba(10,43,94,0.85), rgba(0,166,196,0.7)), url('https://raw.githubusercontent.com/namnt2705/khoacntt/main/MHP00588-2.jpg') center/cover no-repeat;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero-slogan {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn-solid {
+            background: white;
+            color: #0A2B5E;
+            border: none;
+        }
+        .hero-buttons .btn-solid:hover {
+            background: #0A2B5E;
+            color: white;
+        }
+        .hero-buttons .btn-outline {
+            border-color: white;
+            color: white;
+        }
+        .hero-buttons .btn-outline:hover {
+            background: white;
+            color: #0A2B5E;
+        }
+
+        /* section title */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0A2B5E;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #00A6C4;
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            border-radius: 2px;
+        }
+        .section-padding {
+            padding: 80px 0;
+        }
+        .bg-light {
+            background-color: #F5F7FA;
+        }
+
+        /* cards */
+        .stats-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .stat-card {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-8px);}
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00A6C4;
+        }
+        .news-grid, .activities-grid, .faculty-grid, .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0A2B5E;
+            margin-bottom: 8px;
+        }
+        .activity-title {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .activity-title:hover {
+            color: #00A6C4;
+            text-decoration: underline;
+        }
+        .activity-img {
+            cursor: pointer;
+        }
+        .faculty-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
+            border: 3px solid #00A6C4;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .contact-details {
+            flex: 1;
+        }
+        .contact-form {
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #00A6C4;
+            box-shadow: 0 0 0 3px rgba(0,166,196,0.1);
+        }
+        .map-container iframe {
+            width: 100%;
+            border-radius: 24px;
+            margin-top: 20px;
+        }
+        footer {
+            background: #0A2B5E;
+            color: #ccc;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .social-links a {
+            color: white;
+            margin: 0 12px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+                padding: 20px 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .stats-grid {
+                flex-direction: column;
+            }
+        }
+        /* animation fade-up */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btn-small {
+            display: inline-block;
+            margin-top: 12px;
+            background: #00A6C4;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-small:hover {
+            background: #0A2B5E;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">Khoa <span>CNTT</span> | GDU</div>
+                <div class="menu-btn" id="menuBtn">☰</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#gioithieu">Giới thiệu</a></li>
+                    <li><a href="#daotao">Đào tạo</a></li>
+                    <li><a href="#hoatdong">Hoạt động SV</a></li>
+                    <li><a href="#lienhe">Liên hệ</a></li>
+                </ul>
+                <button class="btn-outline" id="dangkyBtn">Đăng ký tư vấn</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME / HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1 class="hero-title">KHOA CÔNG NGHỆ THÔNG TIN <br>-- TRƯỜNG ĐẠI HỌC GIA ĐỊNH</h1>
+                <p class="hero-slogan">HỌC ĐỂ LÀM -- LÀM ĐỂ TRẢI NGHIỆM -- TRẢI NGHIỆM ĐỂ SÁNG TẠO</p>
+                <div class="hero-buttons">
+                    <button class="btn-solid" id="heroConsultBtn">Đăng ký tư vấn</button>
+                    <a href="#daotao" class="btn-outline" style="text-decoration: none;">Khám phá ngành học</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- GIỚI THIỆU NHANH + THỐNG KÊ -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="fade-up">
+                    <h2 class="section-title">Về Khoa CNTT</h2>
+                    <p style="font-size:1.1rem; line-height:1.6; margin-bottom: 20px;">Khoa Công nghệ thông tin Trường Đại học Gia Định là môi trường đào tạo năng động, gắn kết chặt chẽ giữa kiến thức chuyên môn và thực tiễn doanh nghiệp. Với định hướng "Học để làm - Làm để trải nghiệm - Trải nghiệm để sáng tạo", Khoa trang bị cho sinh viên nền tảng công nghệ vững chắc, kỹ năng nghề nghiệp hiện đại và tư duy đổi mới sáng tạo, giúp người học tự tin thích ứng với sự phát triển không ngừng của cuộc cách mạng công nghiệp số.</p>
+                    <div style="display: flex; justify-content: center; margin-top: 20px;">
+                        <img src="https://raw.githubusercontent.com/namnt2705/khoacntt/main/XTM00200.jpg" alt="Giới thiệu khoa" style="border-radius: 28px; max-width: 100%; height: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+                <div class="stats-grid fade-up">
+                    <div class="stat-card"><div class="stat-number">5000+</div><div>Sinh viên</div></div>
+                    <div class="stat-card"><div class="stat-number">100+</div><div>Doanh nghiệp đối tác</div></div>
+                    <div class="stat-card"><div class="stat-number">92%</div><div>Tỉ lệ việc làm sau tốt nghiệp</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIN TỨC NỔI BẬT -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="fade-up"><h2 class="section-title">Tin tức & Sự kiện</h2></div>
+                <div class="news-grid" id="newsGrid">
+                    <!-- data from file -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GIỚI THIỆU CHI TIẾT (Lịch sử, Tầm nhìn, CSVC, Giảng viên) -->
+        <section id="gioithieu" class="section-padding">
+            <div class="container">
+                <div class="fade-up"><h2 class="section-title">Giới thiệu chi tiết</h2></div>
+                <div class="fade-up">
+                    <h3 style="color:#0A2B5E; margin: 20px 0 10px;">📜 Lịch sử hình thành</h3>
+                    <p>Khoa Công nghệ thông tin Trường Đại học Gia Định được thành lập vào năm 2007, cùng thời điểm hình thành và phát triển của Nhà trường. Trong giai đoạn đầu, Khoa tập trung đào tạo hai ngành mũi nhọn là Mạng máy tính và Truyền thông dữ liệu, Kỹ thuật phần mềm nhằm đáp ứng nhu cầu nguồn nhân lực công nghệ thông tin chất lượng cao cho xã hội. Trải qua quá trình xây dựng và phát triển, Khoa không ngừng đổi mới chương trình đào tạo, nâng cao chất lượng giảng dạy, tăng cường hợp tác doanh nghiệp và mở rộng các ngành đào tạo theo xu hướng công nghệ hiện đại. Năm 2019, Khoa tiếp tục mở ngành Công nghệ thông tin và từng bước phát triển các lĩnh vực đào tạo mới đáp ứng yêu cầu của cuộc cách mạng công nghiệp 4.0. Đến nay, Khoa Công nghệ thông tin là một trong những đơn vị đào tạo trọng điểm của Trường Đại học Gia Định, với các ngành đào tạo gồm: Công nghệ thông tin, Kỹ thuật phần mềm, Mạng máy tính và Truyền thông dữ liệu, Trí tuệ nhân tạo, An ninh mạng và Khoa học dữ liệu.</p>
+                    
+                    <h3 style="color:#0A2B5E; margin: 30px 0 10px;">🎯 Tầm nhìn - Sứ mệnh</h3>
+                    <p><strong>Tầm nhìn:</strong> Trở thành đơn vị đào tạo công nghệ thông tin theo định hướng ứng dụng, đổi mới sáng tạo và gắn kết doanh nghiệp, góp phần đào tạo nguồn nhân lực chất lượng cao cho xã hội số.<br>
+                    <strong>Sứ mệnh:</strong> Đào tạo thế hệ kỹ sư và cử nhân công nghệ thông tin có năng lực chuyên môn, kỹ năng thực hành và tư duy sáng tạo, sẵn sàng thích ứng với sự thay đổi của công nghệ và thị trường lao động trong nước, quốc tế.</p>
+
+                    <h3 style="color:#0A2B5E; margin: 30px 0 10px;">🏛️ Cơ sở vật chất</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                        <img src="https://raw.githubusercontent.com/namnt2705/khoacntt/main/XTM00314.jpg" alt="Phòng thí nghiệm AI" style="border-radius: 20px; width: 100%; max-width: 450px; object-fit: cover;">
+                        <div style="flex:1"><strong>Phòng Thí nghiệm trí tuệ nhân tạo:</strong> Là không gian nghiên cứu và thực hành công nghệ AI hiện đại của Khoa Công nghệ thông tin. Tại đây, sinh viên được tiếp cận các công nghệ tiên tiến như Machine Learning, Deep Learning, Computer Vision và Data Science thông qua các dự án thực tế, hoạt động nghiên cứu khoa học và hợp tác doanh nghiệp, góp phần phát triển năng lực sáng tạo và kỹ năng nghề nghiệp trong kỷ nguyên số.</div>
+                    </div>
+                    
+                    <h3 style="color:#0A2B5E; margin: 40px 0 20px;">👨‍🏫 Đội ngũ giảng viên dày dặn kinh nghiệm</h3>
+                    <div class="faculty-grid" id="facultyGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ĐÀO TẠO -->
+        <section id="daotao" class="section-padding bg-light">
+            <div class="container">
+                <div class="fade-up"><h2 class="section-title">Đào tạo - Các ngành nổi bật</h2></div>
+                <div class="training-grid" id="trainingGrid"></div>
+            </div>
+        </section>
+
+        <!-- HOẠT ĐỘNG SINH VIÊN (dữ liệu động, click ảnh/title mở facebook) -->
+        <section id="hoatdong" class="section-padding">
+            <div class="container">
+                <div class="fade-up"><h2 class="section-title">Hoạt động sinh viên</h2></div>
+                <div class="activities-grid" id="activitiesGrid"></div>
+            </div>
+        </section>
+
+        <!-- LIÊN HỆ -->
+        <section id="lienhe" class="section-padding bg-light">
+            <div class="container">
+                <div class="fade-up"><h2 class="section-title">Liên hệ với chúng tôi</h2></div>
+                <div class="contact-info">
+                    <div class="contact-details">
+                        <h3>📌 Văn phòng khoa</h3>
+                        <p><strong>Địa chỉ:</strong> Số 371 Nguyễn Kiệm, Phường Hạnh Thông, TP.HCM</p>
+                        <p><strong>Điện thoại:</strong> 0988 983 603</p>
+                        <p><strong>Email:</strong> gdu-khoacntt@giadinh.edu.vn</p>
+                        <p><strong>Giờ làm việc:</strong> 08h00 - 17h00, Thứ 2 - Thứ 6</p>
+                        <div class="social-links" style="margin-top: 20px;">
+                            <a href="https://www.facebook.com/GDU.KhoaCNTT" target="_blank">📘 Facebook</a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>📩 Gửi tin nhắn</h3>
+                        <form id="contactForm">
+                            <div class="form-group"><input type="text" placeholder="Họ và tên" required></div>
+                            <div class="form-group"><input type="email" placeholder="Email" required></div>
+                            <div class="form-group"><input type="tel" placeholder="Số điện thoại"></div>
+                            <div class="form-group"><textarea rows="3" placeholder="Nội dung"></textarea></div>
+                            <button type="submit" class="btn-solid">Gửi liên hệ</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.924132172184!2d106.67450117583866!3d10.817117958440207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed8e1ebc351%3A0xcde980107fdab6de!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBHaWEgxJDhu4tuaA!5e0!3m2!1svi!2s!4v1780986760426!5m2!1svi!2s" width="600" height="350" style="border:0; width:100%;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Khoa Công nghệ thông tin - Trường Đại học Gia Định. Định hướng phát triển bền vững.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dữ liệu có thể thay đổi dễ dàng (hình ảnh, link facebook)
+        // TIN TỨC (3 bài)
+        const newsData = [
+            { title: "Deepfake AI: Thách thức an ninh và niềm tin số trong kỷ nguyên trí tuệ nhân tạo", image: "https://raw.githubusercontent.com/namnt2705/khoacntt/main/MHP00588-2.jpg", fbLink: "https://www.facebook.com/share/p/18hrwiDYfF/" },
+            { title: "Giải nhì IT Got Talent 2026", image: "https://raw.githubusercontent.com/namnt2705/khoacntt/main/XTM00314.jpg", fbLink: "https://www.facebook.com/share/p/1CocBcEFSZ/" },
+            { title: "Bóng đá sinh viên", image: "https://raw.githubusercontent.com/namnt2705/khoacntt/main/XTM00200.jpg", fbLink: "https://www.facebook.com/share/p/18WeQ2hwNs/" }
+        ];
+
+        // GIẢNG VIÊN (thiếu ảnh -> placeholder avatar)
+        const facultyData = [
+            { name: "TS. Nguyễn Văn Mùi", degree: "Tiến Sĩ", major: "Mạng máy tính - viễn thông, Trí tuệ nhân tạo, An ninh mạng", avatar: "https://ui-avatars.com/api/?background=0A2B5E&color=fff&name=Nguyen+Van+Mui" },
+            { name: "TS. Nguyễn Đăng Trị", degree: "Tiến Sĩ", major: "Trí tuệ nhân tạo, IoT, vi mạch bán dẫn", avatar: "https://ui-avatars.com/api/?background=00A6C4&color=fff&name=Nguyen+Dang+Tri" },
+            { name: "TS. Nguyễn Ánh Việt", degree: "Tiến Sĩ", major: "An ninh mạng", avatar: "https://ui-avatars.com/api/?background=0A2B5E&color=fff&name=Nguyen+Anh+Viet" }
+        ];
+
+        // NGÀNH ĐÀO TẠO (6 ngành với chi tiết alert)
+        const trainingData = [
+            { name: "Công nghệ thông tin", shortDesc: "Đào tạo kiến thức và kỹ năng nền tảng về lập trình, phát triển hệ thống, cơ sở dữ liệu.", detail: "Mục tiêu: Đào tạo nguồn nhân lực CNTT có năng lực thiết kế, phát triển giải pháp chuyển đổi số. Cơ hội việc làm: Lập trình viên, chuyên viên CNTT, quản trị hệ thống." },
+            { name: "Kỹ thuật phần mềm", shortDesc: "Chuyên sâu về quy trình phân tích, thiết kế, phát triển, kiểm thử phần mềm.", detail: "Mục tiêu: Đào tạo kỹ sư phần mềm chất lượng cao. Cơ hội: Developer, Tester, BA, PM." },
+            { name: "Mạng máy tính và Truyền thông dữ liệu", shortDesc: "Hạ tầng mạng, truyền thông dữ liệu, điện toán đám mây.", detail: "Cơ hội: Quản trị mạng, kỹ sư Cloud, vận hành trung tâm dữ liệu." },
+            { name: "Trí tuệ nhân tạo", shortDesc: "Machine Learning, Deep Learning, Computer Vision, NLP.", detail: "Cơ hội: AI Engineer, ML Engineer, chuyên viên nghiên cứu AI." },
+            { name: "An ninh mạng", shortDesc: "Bảo vệ hệ thống, dữ liệu trước các nguy cơ tấn công mạng.", detail: "Cơ hội: Chuyên viên an ninh mạng, Security Analyst." },
+            { name: "Khoa học dữ liệu", shortDesc: "Thu thập, phân tích, trực quan hóa và khai thác dữ liệu.", detail: "Cơ hội: Data Analyst, Data Scientist, Data Engineer." }
+        ];
+
+        // HOẠT ĐỘNG SINH VIÊN (có hình ảnh + link FB, click vào title/ảnh mở tab mới)
+        const activitiesData = [
+            { title: "Kiến tập AWS", image: "https://raw.githubusercontent.com/namnt2705/khoacntt/main/617566200_122116665165129835_1479065015581966993_n.jpg", desc: "Chuyến kiến tập tại Amazon Web Services (AWS) của 120 sinh viên Khối ngành Công nghệ Thông tin Khóa 19 là hoạt động trải nghiệm doanh nghiệp, cột mốc truyền cảm hứng mạnh mẽ cho hành trình học tập và định hướng nghề nghiệp của sinh viên GDU ngay từ năm nhất.", fbLink: "https://www.facebook.com/share/p/1NV1dM4K2u/" },
+            { title: "Thiết kế website Qũy Bông hồng nhỏ", image: "https://raw.githubusercontent.com/namnt2705/khoacntt/main/XTM00156.jpg", desc: "Thông qua dự án, sinh viên Khoa CNTT GDU không chỉ rèn luyện kỹ năng chuyên môn, mà còn học cách tiếp cận bài toán thực tế từ tổ chức xã hội, lắng nghe nhu cầu của cộng đồng, hiểu rằng công nghệ chỉ thực sự có ý nghĩa khi đặt con người làm trung tâm.", fbLink: "https://www.facebook.com/share/p/18vNuPFvFy/" }
+        ];
+
+        // Render News
+        function renderNews() {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = newsData.map(item => `
+                <div class="card">
+                    <img class="card-img" src="${item.image}" alt="news" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <a href="${item.fbLink}" target="_blank" class="btn-small">Xem chi tiết →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Faculty
+        function renderFaculty() {
+            const grid = document.getElementById('facultyGrid');
+            grid.innerHTML = facultyData.map(f => `
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <img class="faculty-img" src="${f.avatar}" alt="${f.name}">
+                    <h3>${f.name}</h3>
+                    <p><strong>${f.degree}</strong></p>
+                    <p>${f.major}</p>
+                </div>
+            `).join('');
+        }
+
+        // Render Training ( với nút xem chi tiết alert)
+        function renderTraining() {
+            const grid = document.getElementById('trainingGrid');
+            grid.innerHTML = trainingData.map(t => `
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">${t.name}</h3>
+                        <p>${t.shortDesc}</p>
+                        <button class="btn-small detail-btn" data-detail="${t.detail.replace(/"/g, '&quot;')}">Xem chi tiết</button>
+                    </div>
+                </div>
+            `).join('');
+            // attach event cho button
+            document.querySelectorAll('.detail-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const detail = btn.getAttribute('data-detail');
+                    alert(detail);
+                });
+            });
+        }
+
+        // Render Activities (click vào ảnh hoặc tiêu đề mở facebook)
+        function renderActivities() {
+            const grid = document.getElementById('activitiesGrid');
+            grid.innerHTML = activitiesData.map(act => `
+                <div class="card">
+                    <img class="card-img activity-img" src="${act.image}" alt="${act.title}" data-link="${act.fbLink}" style="cursor:pointer;">
+                    <div class="card-content">
+                        <h3 class="card-title activity-title" data-link="${act.fbLink}" style="cursor:pointer;">${act.title}</h3>
+                        <p>${act.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+            // Thêm sự kiện click cho tất cả activity-img và activity-title
+            document.querySelectorAll('.activity-img, .activity-title').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    const link = el.getAttribute('data-link');
+                    if(link) window.open(link, '_blank');
+                });
+            });
+        }
+
+        // Scroll animation Intersection Observer
+        function initScrollAnim() {
+            const elements = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            elements.forEach(el => observer.observe(el));
+            // manually add visible to those already visible
+        }
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Đăng ký tư vấn alert
+        const btns = document.querySelectorAll('#dangkyBtn, #heroConsultBtn');
+        btns.forEach(btn => {
+            if(btn) btn.addEventListener('click', () => alert('Cảm ơn bạn đã quan tâm! Chúng tôi sẽ liên hệ tư vấn sớm nhất.'));
+        });
+
+        // Form submit alert
+        const contactForm = document.getElementById('contactForm');
+        if(contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thông tin của bạn đã được ghi nhận. Khoa sẽ phản hồi trong 24h!');
+                contactForm.reset();
+            });
+        }
+
+        // Smooth anchor cho nav
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if(navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        renderNews();
+        renderFaculty();
+        renderTraining();
+        renderActivities();
+        initScrollAnim();
+        // Thêm class visible cho các phần tử fade-up đã hiện ban đầu (thủ công)
+        setTimeout(() => {
+            document.querySelectorAll('.fade-up').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 100) el.classList.add('visible');
+            });
+        }, 200);
+    </script>
+</body>
+</html>
